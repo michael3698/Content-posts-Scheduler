@@ -56,3 +56,5 @@ content scheduling app built with Laravel and Angular
    php artisan migrate --seed
    php artisan serve
 >>>>>>> 88e8c09fc9061272c43fb262b7142b8719197bcd
+>>>>>
+# for open backend laravel change main to master 
