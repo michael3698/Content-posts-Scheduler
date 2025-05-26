@@ -1,0 +1,69 @@
+.filters {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+    font-weight: bold;
+}
+
+select, input[type="date"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    margin-left: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    padding: 10px;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li strong {
+    color: #333;
+}
+
+li span {
+    font-size: 16px;
+    color: #666;
+}
+
+ng-template p {
+    font-style: italic;
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* .filters button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filters button:hover {
+  background-color: #0056b3;
+} */

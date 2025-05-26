@@ -1,0 +1,46 @@
+<h2>scheduled posts</h2>
+
+<div class="filters">
+    <label>
+        status:
+        <select [(ngModel)]="statusFilter" (change)="onFilterChange()">
+        <option value="">all</option>
+        <option value="draft">draft</option>
+        <option value="scheduled">scheduled</option>
+        <option value="published">published</option>
+        </select>
+    </label>
+
+    <label>
+        date:
+        <input type="date" [(ngModel)]="dateFilter" (change)="onFilterChange()" />
+    </label>
+
+    <button class="btn btn-primary" (click)="goToPosts()">Create Posts</button>
+    <button class="btn btn-secondary" (click)="platformsetting()">platforms setting</button>
+    <button (click)="logout()" class="btn btn-danger">Logout</button>
+</div>
+
+
+<!--  -->
+
+<div *ngIf="posts.length > 0; else noPosts">
+  <ul>
+    <li>
+    <strong>title</strong>-
+    <strong>content</strong>-
+    <strong>status</strong>-
+    <strong>scheduled_time</strong>-
+    </li>
+    <li *ngFor="let post of posts">
+      <strong>{{ post.title }}</strong> -
+      <strong>{{ post.content }}</strong> -
+      <strong>{{ post.status }}</strong> -
+      <strong>{{ post.scheduled_time | date: 'short' }}</strong>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noPosts>
+  <p>There are currently no posts.</p>
+</ng-template>

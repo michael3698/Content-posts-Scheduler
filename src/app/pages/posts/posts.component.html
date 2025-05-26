@@ -1,0 +1,107 @@
+<div class="container">
+
+  <div class="header">
+    <h1>Post Manager</h1>
+    <button (click)="showCreate = !showCreate" class="btn toggle">
+        {{ showCreate ? 'Hide Create Post' : ' Show Create Post' }}
+    </button>
+    <button  (click)="goTodashboard()" class="btn dashboard">dashboard</button>
+    <button (click)="logout()" class="btn danger">Logout</button>
+
+
+  </div>
+
+
+
+  <section class="post-section" *ngIf="posts.length > 0">
+    <h2>My Posts</h2>
+    <ul class="post-list">
+      <li *ngFor="let post of posts" class="post-card">
+        <div class="post-content">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.content }}</p>
+          <div class="meta">
+            <span class="badge">{{ post.status }}</span>
+            <span class="date">{{ post.scheduled_time | date: 'short' }}</span>
+          </div>
+        </div>
+        <div class="post-actions">
+          <button (click)="startEdit(post)" class="btn outline">Edit</button>
+          <button (click)="delete(post.id)" class="btn danger">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+
+
+  <section class="card" *ngIf="showCreate">
+
+    <h2>Create New Post</h2>
+    <form (submit)="createPost(); $event.preventDefault()">
+        <label>Title: </label>
+      <input [(ngModel)]="title" name="title" placeholder="Post Title" required />
+
+        <label>content: </label>
+      <textarea [(ngModel)]="content" name="content" placeholder="Post Content" required></textarea> 
+
+        <label>image url: </label>
+      <input [(ngModel)]="image_url" name="image_url" placeholder="Image URL (optional)" />
+
+        <label>status: </label>
+      <select [(ngModel)]="status" name="status">
+        <option value="draft">Draft</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="published">Published</option>
+      </select>
+
+      <input *ngIf="status === 'scheduled'" type="datetime-local" [(ngModel)]="scheduled_time" name="scheduled_time" required />
+        
+      <label>platforms: </label>
+      <div class="platforms">
+        <label *ngFor="let platform of platforms">
+          <input type="checkbox" [value]="platform.id" (change)="onPlatformToggle(platform.id, $event)" />
+          {{ platform.name }}
+        </label>
+      </div>
+
+      <button type="submit" class="btn primary full"> Schedule Post</button>
+    </form>
+  </section>
+
+
+  
+  <section *ngIf="editingPost" class="card">
+    <h2>Edit Post</h2>
+    <form (submit)="submitEdit(); $event.preventDefault()">
+        <label>Title: </label>
+      <input [(ngModel)]="editingPost.title" name="edit_title" placeholder="Title" />
+      <label>content: </label>
+      <textarea [(ngModel)]="editingPost.content" name="edit_content" placeholder="Content"></textarea>
+      <label>image url: </label>
+      <input [(ngModel)]="editingPost.image_url" name="edit_image_url" placeholder="Image URL" />
+
+      <label>status: </label>
+      <select [(ngModel)]="editingPost.status" name="status">
+        <option value="draft">Draft</option>
+        <option value="scheduled">Scheduled</option>
+        <option value="published">Published</option>
+      </select>
+
+        <label>scheduled_time</label>
+      <input type="datetime-local" [(ngModel)]="editingPost.scheduled_time" name="edit_scheduled_time" />
+        <label>platforms: </label>
+      <div class="platforms">
+        <label *ngFor="let p of platforms">
+          <input type="checkbox" [value]="p.id" [checked]="platform_ids.includes(p.id)" (change)="onPlatformToggle(p.id, $event)" />
+          {{ p.name }}
+        </label>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit" class="btn primary">💾 Save</button>
+        <button type="button" (click)="cancelEdit()" class="btn outline">Cancel</button>
+      </div>
+    </form>
+  </section>
+</div>

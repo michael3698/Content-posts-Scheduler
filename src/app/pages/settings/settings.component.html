@@ -1,0 +1,13 @@
+<section class="card">
+  <h2>🔧 Platform Settings</h2>
+  <ul class="platform-list">
+    <li *ngFor="let p of platforms" [class.inactive]="!p.active">
+      <span>{{ p.name }} <small>({{ p.type }})</small></span>
+      <button (click)="togglePlatform(p.id)" [ngClass]="{ 'disable': p.active, 'enable': !p.active }">
+        {{ p.active ? 'Disable' : 'Enable' }}
+      </button>
+    </li>
+  </ul>
+  <button (click)="goTodashboard()" class="btn btn-primary dash">dashboard</button>
+
+</section>
